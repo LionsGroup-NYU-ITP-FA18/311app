@@ -1,0 +1,29 @@
+{
+  "lanes": [
+    {
+      "id": "New",
+      "title": "Planned Tasks",
+      "style": {"width": 280},
+      "cards": []
+    },
+    {
+      "id": "In Progress",
+      "title": "In Progress Tasks",
+      "style": {"width": 280},
+      "cards": []
+    },
+    {
+      "id": "In Review",
+      "title": "Needs Review Tasks",
+      "style": {"width": 280},
+      "cards": []
+    },
+    {
+      "id": "Done",
+      "title": "Done Tasks",
+      "style": {"width": 280},
+      "cards": []
+    }
+  ]
+
+}
