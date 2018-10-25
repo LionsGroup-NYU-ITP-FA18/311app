@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import DashBoard from './components/DashBoard.js';
 import logo from './logo.svg';
 import './App.css';
 
@@ -15,8 +16,7 @@ export default class App extends Component {
     const { username } = this.state;
     return (
       <div>
-        {username ? <h1>{`Hello ${username}, Welcome to the 311 app`}</h1> : <h1>Loading.. please wait!</h1>}
-        <img src={logo} alt="react" />
+        {username ? <div><h1>{`Hello ${username}, Welcome to the 311 app`}</h1> <DashBoard /> </div> : <h1>Loading.. please wait!</h1>}
       </div>
     );
   }
