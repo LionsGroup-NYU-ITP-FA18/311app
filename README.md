@@ -12,5 +12,24 @@ After installation, you can follow these steps to run the code:
   npm start
 ```
 
-This should open up the client page on "http://localhost:8000/" and run a server on "http://localhost:3030".
+This should open up the web app at the url "http://localhost:8080/"
 
+Alternatively, you can access what has already been implemented
+and built from this url:
+http://ec2-35-171-166-206.compute-1.amazonaws.com/
+
+The EC2 instance has been configured with PM2 to manage production processes,
+Express as the web framework to route and create those processes,
+and Nginx as the web server.
+
+Restarting the server consists of running this command:
+
+```shell
+pm2 restart index
+```
+
+and possibly additionally this command:
+
+```shell
+sudo service nginx restart
+```
