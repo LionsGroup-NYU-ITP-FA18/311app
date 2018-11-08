@@ -16,7 +16,12 @@ export default class App extends Component {
     const { username } = this.state;
     return (
       <div>
-        {username ? <div><h1>{`Hello ${username}, Welcome to the 311 app`}</h1> <DashBoard /> </div> : <h1>Loading.. please wait!</h1>}
+        {username ? 
+          <div>
+            <h1>{`Hello ${username}, Welcome to the 311 app`}</h1> 
+            <DashBoard /> 
+          </div> 
+        : <h1>Loading.. please wait!</h1>}
       </div>
     );
   }

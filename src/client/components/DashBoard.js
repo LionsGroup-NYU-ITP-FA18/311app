@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import {Board} from 'react-trello';
+import {CustomCard} from './CustomCard.js'
 import '../App.css';
 
 const data = require('./data.json')
 
 export default class DashBoard extends Component {
+  
   state = {boardData: {lanes: []}};
 
   setEventBus = eventBus => {
@@ -12,11 +14,11 @@ export default class DashBoard extends Component {
   }
 
   async componentDidMount() {
-    const response = await this.getBoard();
-    this.setState({boardData: response});
+    var tasks = await this.getTasks();
+    this.setState({boardData: tasks});
   }
-
-  getBoard() {
+  
+  getTasks() {
     return new Promise(resolve => {
       resolve(data);
     })
@@ -53,12 +55,12 @@ export default class DashBoard extends Component {
         return (
             <div className="Board">
                 <Board
-                    editable
-										onCardAdd={this.handleCardAdd}
                     data={this.state.boardData}
                     draggable
                     eventBusHandle={this.setEventBus}
-                />
+                    customCardLayout>
+                    <CustomCard />
+                </Board>
             </div>
         )
     }
