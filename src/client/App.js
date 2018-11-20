@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import DashBoard from './components/DashBoard.js';
+import IssuesKanban from './components/IssuesKanban.js';
+import IssuesList from './components/IssuesList.js';
 import logo from './logo.svg';
 import './App.css';
 
 export default class App extends Component {
-  state = { username: null };
+  state = { username: null,
+            useLanes: true};
 
   componentDidMount() {
     fetch('/api/getUsername')
@@ -19,7 +21,7 @@ export default class App extends Component {
         {username ? 
           <div>
             <h1>{`Hello ${username}, Welcome to the 311 app`}</h1> 
-            <DashBoard /> 
+            <IssuesKanban />  
           </div> 
         : <h1>Loading.. please wait!</h1>}
       </div>

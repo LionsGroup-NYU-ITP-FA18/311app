@@ -1,43 +1,59 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
-export const CustomCard = props => {
+const styles = {
+  card: {
+    minWidth: 50,
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+};
+
+export default class CustomCard extends Component {
+  
+  constructor(props) {
+    super(props);
+  }
+  
+  render() {
     return (
-      <div
-      style={{backgroundColor: '#AFEEEE', padding: 6}}>
-      <header
-        style={{
-                borderBottom: '1px solid #eee',
-                paddingBottom: 6,
-                marginBottom: 10,
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between'
-            }}
-        >
-        <div style={{fontSize: 14, fontWeight: 'bold'}}>
-          {props.name}
-        </div>
-      </header>
-      <div style={{fontSize: 12, color: '#BD3B36'}}>
-        <div style={{color: '#4C4C4C', fontWeight: 'bold'}}>
-          {props.category}
-        </div>
-        <div style={{padding: '5px 0px'}}>
-          <i>
-            {props.desc}
-            <br />
-            <br />
-            User: {props.user}
-            <br />
-            Time Created: {props.time_created}
-            <br />
-            Location: {props.location}
-            <br />
-            Priority: {props.priority}
-          </i>
-        </div>
-      </div>
-    </div>
-
+      <Card className={this.props.card}>
+        <CardContent>
+          <Typography className={this.props.title} color="textSecondary" gutterBottom>
+            {this.props.issue.category}
+          </Typography>
+          <Typography variant="h5" component="h2">
+            {this.props.issue.heading}
+          </Typography>
+          <Typography className={this.props.pos} color="textSecondary">
+            {this.props.issue.location}
+          </Typography>
+          <Typography className={this.props.pos} color="textSecondary">
+            {this.props.issue.user}
+          </Typography>
+          <Typography component="p">
+            {this.props.issue.content}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button size="small">Learn More</Button>
+        </CardActions>
+      </Card>
     )
+  }
 }
