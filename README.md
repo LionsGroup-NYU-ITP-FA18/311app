@@ -12,7 +12,7 @@ After installation, you can follow these steps to run the code:
   npm start
 ```
 
-This should open up the local web app at the url "http://localhost:8080/"
+This should open up the local web app at the url "http://localhost:3000/"
 
 Alternatively, you can access what has already been implemented
 and built from this url:

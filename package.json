@@ -8,8 +8,7 @@
     "express": "^4.16.4",
     "mysql": "^2.16.0",
     "react": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "react-trello": "^2.0.1"
+    "react-dom": "^16.5.2"
   },
   "scripts": {
     "start": "npm run build && node src/server/index.js",

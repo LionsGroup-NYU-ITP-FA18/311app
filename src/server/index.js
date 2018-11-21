@@ -38,7 +38,5 @@ app.get('/api/issues', (req, res) => {
 });
 
 app.get('/api/getUsername', (req, res) => res.send({ username: os.userInfo().username }));
-app.get('/api/hello', (req, res) => res.send({express: "Hello From Express" }));
 app.get('/api/311', (req, res) => res.send({express: "Hello From 311 App" }));
-app.get('/api/411', (req, res) => res.send({express: "Hello From 411 App" }));
 app.listen(3000, () => console.log('Listening on port 3000!'));
