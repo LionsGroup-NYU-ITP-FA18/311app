@@ -6,6 +6,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import axios from 'axios';
 
 const styles = {
   card: {
@@ -28,6 +29,60 @@ export default class CustomCard extends Component {
   
   constructor(props) {
     super(props);
+    this._progressUp = this._progressUp.bind(this);
+    this._progressDown = this._progressDown.bind(this);
+  }
+  
+  _progressUp(event) {
+    var progress = this.props.issue.progress;
+    if(progress === "New") {
+      progress = "In Progress";
+    } else if(progress === "In Progress") {
+      progress = "Needs Review";
+    } else if(progress === "Needs Review") {
+      progress = "Done";
+    }
+    var issueBaseUrl = "http://localhost:3000/api/issues/update/";
+    var self = this;
+    var payload={
+      "progress":progress,
+      "issueId":this.props.issue.issueId
+    }
+
+    axios.put(issueBaseUrl+this.props.issue.issueId, payload)
+    .then(function (response) {
+      console.log(response);
+      self.props.getIssues();
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+  
+  _progressDown(event) {
+    var progress = this.props.issue.progress;
+    if(progress === "Done") {
+      progress = "Needs Review";
+    } else if(progress === "In Progress") {
+      progress = "New";
+    } else if(progress === "Needs Review") {
+      progress = "In Progress";
+    }
+    var issueBaseUrl = "http://localhost:3000/api/issues/update/";
+    var self = this;
+    var payload={
+      "progress":progress,
+      "issueId":this.props.issue.issueId
+    }
+
+    axios.put(issueBaseUrl+this.props.issue.issueId, payload)
+    .then(function (response) {
+      console.log(response);
+      self.props.getIssues();
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
   
   render() {
@@ -50,8 +105,9 @@ export default class CustomCard extends Component {
             {this.props.issue.content}
           </Typography>
         </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
+        <CardActions>  
+          {this.props.issue.progress != "New" ? <Button size="small" onClick={(event) => this._progressDown()}>Move left</Button> : <div />}
+          {this.props.issue.progress != "Done" ?<Button size="small" onClick={(event) => this._progressUp()}>Move  right</Button> : <div />}
         </CardActions>
       </Card>
     )

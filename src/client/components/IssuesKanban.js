@@ -44,6 +44,8 @@ class IssuesKanban extends Component {
   
   constructor(props) {
     super(props);
+    this.getIssues = this.getIssues.bind(this);
+    
     this.state = {
       error: null,
       isLoaded: false,
@@ -51,7 +53,7 @@ class IssuesKanban extends Component {
     };
   }
 
-  componentDidMount() {
+  getIssues() {
     fetch("http://localhost:3000/api/issues/municipality/"+this.props.mun_id)
       .then(res => res.json())
       .then(
@@ -72,12 +74,17 @@ class IssuesKanban extends Component {
         }
       )
     }
+  
+
+  componentDidMount() {
+    this.getIssues();
+    }
     
     fillColumn(str) {
       var arr = []
       this.state.issues.map((issue) => {
       if(issue.progress === str) {
-        arr.push(<CustomCard issue={issue} />)
+        arr.push(<CustomCard issue={issue} getIssues={this.getIssues}/>)
       }})
       return arr 
     }
@@ -95,6 +102,9 @@ class IssuesKanban extends Component {
                 <Button variant="contained" color="primary" className={this.props.userButton} 
                 onClick={(event) => this.props.history.push('/user/'+ this.props.currentUser)} >
                   User Settings
+                </Button>
+                <Button variant="contained" color="primary" onClick={(event) => this.props.signOut()}>
+                    Sign out
                 </Button>
               </Toolbar>
             </AppBar>

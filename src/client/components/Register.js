@@ -164,6 +164,7 @@ class Register extends Component {
                    onChange = {this._handlePasswordChange}
                    />
             </div>
+            <div style={{display: 'flex', justifyContent: 'center'}}>
             <FormControl component="fieldset">
               <FormLabel component="legend">Admin</FormLabel>
               <RadioGroup
@@ -176,9 +177,12 @@ class Register extends Component {
                 <FormControlLabel value="0" control={<Radio />} label="Non-admin" />
               </RadioGroup>
               </FormControl>
+              </div>
+              <div style={{display: 'flex', justifyContent: 'center'}}>
                <Button label="Register" variant="contained" color="primary" onClick={(event) => this._handleClick(event)}>
                 Register Municipality Official
                </Button>
+               </div>
           </div>
          </MuiThemeProvider>
       </div>

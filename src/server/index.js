@@ -43,6 +43,7 @@ router.post('/login',login.login);
 router.get('/issues',issues.issues);
 router.get('/issues/municipality/:id',issues.munIssues);
 router.get('/issues/:id',issues.singleIssue);
+router.put('/issues/update/:id',issues.updateIssueStatus);
 
 // Routes to get user information
 router.get('/users/:username',users.oneUser);

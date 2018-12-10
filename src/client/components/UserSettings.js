@@ -27,7 +27,6 @@ class UserSettings extends Component {
   constructor(props) {
     super(props);
     this._handleUserChange = this._handleUserChange.bind(this);
-    this.goBack = this.goBack.bind(this);
     this.removeUser = this.removeUser.bind(this);
     this.state = {
       user_remove:'',
@@ -52,10 +51,6 @@ class UserSettings extends Component {
           });
         }
       )
-    }
-
-    goBack()  {
-      this.props.history.goBack();
     }
 
     _handleUserChange(e) {
@@ -90,6 +85,12 @@ class UserSettings extends Component {
                 <Typography variant="h6" color="inherit" className={this.props.grow}>
                   User Settings
                 </Typography>
+                <Button variant="contained" color="primary" onClick={(event) => this.props.history.goBack()}>
+                    Back to Issues
+                </Button>
+                <Button variant="contained" color="primary" onClick={(event) => this.props.signOut()}>
+                    Sign Out
+                </Button>
               </Toolbar>
             </AppBar>
             <div className={this.props.root}>
