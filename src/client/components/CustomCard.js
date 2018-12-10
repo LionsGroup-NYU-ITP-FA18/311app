@@ -44,7 +44,7 @@ export default class CustomCard extends Component {
             {this.props.issue.location}
           </Typography>
           <Typography className={this.props.pos} color="textSecondary">
-            {this.props.issue.user}
+            {this.props.issue.username}
           </Typography>
           <Typography component="p">
             {this.props.issue.content}

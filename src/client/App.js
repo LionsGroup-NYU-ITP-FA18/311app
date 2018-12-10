@@ -1,29 +1,39 @@
 import React, { Component } from 'react';
-import IssuesKanban from './components/IssuesKanban.js';
-import IssuesList from './components/IssuesList.js';
+import { Route, Link } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
+import Login from './components/Login.js';
+import IssuesKanban from './components/IssuesKanban.js'
 
 export default class App extends Component {
-  state = { username: null,
-            useLanes: true};
-
-  componentDidMount() {
-    fetch('/api/getUsername')
-      .then(res => res.json())
-      .then(user => this.setState({ username: user.username }));
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      loggedIn: false,
+      mun_id: -1,
+      currentUser: ''
+    }
+    
+    this.changeAfterLogin = this.changeAfterLogin.bind(this);
+  }
+  
+  changeAfterLogin(id, username) {
+    this.setState({
+      loggedIn: true,
+      mun_id: id,
+      currentUser: username
+    })
   }
 
   render() {
-    const { username } = this.state;
     return (
-      <div>
-        {username ? 
-          <div>
-            <h1>{`Hello ${username}, Welcome to the 311 app`}</h1> 
-            <IssuesKanban />  
+      <div className="app-routes">
+        {this.state.loggedIn ? 
+          <div className="app-page">
+            <IssuesKanban mun_id = {this.state.mun_id} currentUser = {this.state.currentUser}/>
           </div> 
-        : <h1>Loading.. please wait!</h1>}
+          : <Login changeAfterLogin = {this.changeAfterLogin}/>}
       </div>
     );
   }

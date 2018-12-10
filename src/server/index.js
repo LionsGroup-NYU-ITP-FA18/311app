@@ -1,8 +1,11 @@
 const express = require('express');
-const os = require('os');
 const mysql = require('mysql');
-
 const app = express();
+const bodyParser = require('body-parser');
+
+const login = require('./routes/loginroutes');
+const issues = require('./routes/issueroutes');
+const users = require('./routes/userroutes');
 
 function connectDatabase() {
   return mysql.createConnection({
@@ -15,28 +18,32 @@ function connectDatabase() {
 
 app.use(express.static('dist'));
 
-app.get('/api/issues', (req, res) => {
-
-    connection = connectDatabase();
-
-    connection.connect(function(err) {
-      if (err) {
-          console.error('Error connecting: ' + err.stack);
-          return;
-      }
-    });
-
-    connection.query('SELECT * FROM issues', function (error, results, fields) {
-      if (error) {
-        console.error('Error connecting: ' + error.stack);
-        return;
-      }
-      res.send(results)
-    });
-
-    connection.end();
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
 });
 
-app.get('/api/getUsername', (req, res) => res.send({ username: os.userInfo().username }));
-app.get('/api/311', (req, res) => res.send({express: "Hello From 311 App" }));
+var router = express.Router();
+app.use('/api', router);
 app.listen(3000, () => console.log('Listening on port 3000!'));
+
+
+// Test route
+router.get('/', function(req, res) {
+    res.json({ message: 'welcome to the municipality 311 app' });
+});
+
+// Routes to handle user registration
+router.post('/register',login.register);
+router.post('/login',login.login);
+
+// Routes for issues
+router.get('/issues',issues.issues);
+router.get('/issues/municipality/:id',issues.munIssues);
+router.get('/issues/:id',issues.singleIssue);
+
+// Routes to get user information
+router.get('/user/:id',users.oneUser);

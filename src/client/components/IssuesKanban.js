@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import AppBar from '@material-ui/core/AppBar';
+import Typography from '@material-ui/core/Typography';
+import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 import CustomCard from './CustomCard.js';
 
 const styles = theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  grow: {
+    flexGrow: 1,
+  },
   container: {
     display: 'grid',
     gridTemplateColumns: 'repeat(12, 1fr)',
@@ -35,7 +46,7 @@ export default class IssuesKanban extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:3000/api/issues")
+    fetch("http://localhost:3000/api/issues/municipality/"+this.props.mun_id)
       .then(res => res.json())
       .then(
         (result) => {
@@ -68,32 +79,50 @@ export default class IssuesKanban extends Component {
     render() {
       return (
         <div>
-          <Grid container spacing={24}>
-            <Grid item xs={3}>
-              <Paper className={this.props.paper}>
-              New  
-                {this.fillColumn("New")}
-              </Paper>
-            </Grid>
-            <Grid item xs={3}>
-              <Paper className={this.props.paper}>
-              In Progress
-                {this.fillColumn("In Progress")}
-              </Paper>
-            </Grid>
-            <Grid item xs={3}>
-              <Paper className={this.props.paper}>
-              Needs Review
-                {this.fillColumn("Needs Review")}
-              </Paper>
-            </Grid>
-            <Grid item xs={3}>
-              <Paper className={this.props.paper}>
-              Done
-                {this.fillColumn("Done")}
-              </Paper>
-            </Grid>
-          </Grid>
+          <MuiThemeProvider>
+            <div className={this.props.root}>
+            <AppBar position="static">
+              <Toolbar>
+                <Typography variant="h6" color="inherit" className={this.props.grow}>
+                  Hello {this.props.currentUser}
+                </Typography>
+                <Button variant="contained" color="primary">
+                  User Settings
+                </Button>
+              </Toolbar>
+            </AppBar>
+              <Grid container spacing={24}>
+                <Grid item xs={3}>
+                  <Paper className={this.props.paper}>
+                  New  
+                  <br />
+                    {this.fillColumn("New")}
+                  </Paper>
+                </Grid>
+                <Grid item xs={3}>
+                  <Paper className={this.props.paper}>
+                  In Progress
+                  <br />
+                    {this.fillColumn("In Progress")}
+                  </Paper>
+                </Grid>
+                <Grid item xs={3}>
+                  <Paper className={this.props.paper}>
+                  Needs Review
+                  <br />
+                    {this.fillColumn("Needs Review")}
+                  </Paper>
+                </Grid>
+                <Grid item xs={3}>
+                  <Paper className={this.props.paper}>
+                  Done
+                  <br />
+                    {this.fillColumn("Done")}
+                  </Paper>
+                </Grid>
+              </Grid>
+            </div>
+          </MuiThemeProvider>
         </div>
       )
     }
