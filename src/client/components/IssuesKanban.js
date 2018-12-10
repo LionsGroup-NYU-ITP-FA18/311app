@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
@@ -8,6 +9,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
 import CustomCard from './CustomCard.js';
 
 const styles = theme => ({
@@ -20,7 +22,7 @@ const styles = theme => ({
   container: {
     display: 'grid',
     gridTemplateColumns: 'repeat(12, 1fr)',
-    gridGap: `${theme.spacing.unit * 2}px`,
+    gridGap: `${theme.spacing.unit * 4}px`,
   },
   paper: {
     padding: theme.spacing.unit,
@@ -30,11 +32,15 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit,
   },
   divider: {
-    margin: `${theme.spacing.unit * 2}px 0`,
+    margin: `${theme.spacing.unit * 4}px 0`,
+  },
+  userButton: {
+    marginLeft: 20,
+    marginRight: -12,
   },
 });
 
-export default class IssuesKanban extends Component {
+class IssuesKanban extends Component {
   
   constructor(props) {
     super(props);
@@ -86,7 +92,8 @@ export default class IssuesKanban extends Component {
                 <Typography variant="h6" color="inherit" className={this.props.grow}>
                   Hello {this.props.currentUser}
                 </Typography>
-                <Button variant="contained" color="primary">
+                <Button variant="contained" color="primary" className={this.props.userButton} 
+                onClick={(event) => this.props.history.push('/user/'+ this.props.currentUser)} >
                   User Settings
                 </Button>
               </Toolbar>
@@ -95,28 +102,28 @@ export default class IssuesKanban extends Component {
                 <Grid item xs={3}>
                   <Paper className={this.props.paper}>
                   New  
-                  <br />
+                  <Divider />
                     {this.fillColumn("New")}
                   </Paper>
                 </Grid>
                 <Grid item xs={3}>
                   <Paper className={this.props.paper}>
                   In Progress
-                  <br />
+                  <Divider />
                     {this.fillColumn("In Progress")}
                   </Paper>
                 </Grid>
                 <Grid item xs={3}>
                   <Paper className={this.props.paper}>
                   Needs Review
-                  <br />
+                  <Divider />
                     {this.fillColumn("Needs Review")}
                   </Paper>
                 </Grid>
                 <Grid item xs={3}>
                   <Paper className={this.props.paper}>
                   Done
-                  <br />
+                  <Divider />
                     {this.fillColumn("Done")}
                   </Paper>
                 </Grid>
@@ -127,3 +134,5 @@ export default class IssuesKanban extends Component {
       )
     }
 }
+
+export default withRouter(IssuesKanban);

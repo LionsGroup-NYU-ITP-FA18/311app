@@ -15,7 +15,17 @@ if(!err) {
 });
 
 exports.oneUser = function(req,res){
-  connection.query('SELECT * FROM users WHERE user = ?', req.params.username, function (error, results, fields) {
+  connection.query('SELECT * FROM users WHERE username = ?', req.params.username, function (error, results, fields) {
+    if (error) {
+      console.error('Error connecting: ' + error.stack);
+      return;
+    }
+    res.send(results)
+  });
+}
+
+exports.removeUser = function(req,res){
+  connection.query('DELETE FROM users WHERE username = ?', req.params.username, function (error, results, fields) {
     if (error) {
       console.error('Error connecting: ' + error.stack);
       return;

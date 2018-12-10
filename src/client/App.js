@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route, BrowserRouter, withRouter } from 'react-router-dom';
+import { Redirect, Switch } from 'react-router';
 import logo from './logo.svg';
 import './App.css';
 import Login from './components/Login.js';
 import IssuesKanban from './components/IssuesKanban.js'
+import UserSettings from './components/UserSettings.js'
+import IssueDetail from './components/IssueDetail.js'
+import Register from './components/Register.js'
 
-export default class App extends Component {
+const PrivateRoute = ({ component: Component, userLoggedIn, ...rest }) => (
+  <Route {...rest} render={(props) => (
+    userLoggedIn
+      ? <Component {...props} {...rest} />
+      : <Redirect to='/' />
+  )} />
+)
+
+class App extends Component {
   
   constructor(props) {
     super(props);
@@ -29,12 +41,19 @@ export default class App extends Component {
   render() {
     return (
       <div className="app-routes">
-        {this.state.loggedIn ? 
-          <div className="app-page">
-            <IssuesKanban mun_id = {this.state.mun_id} currentUser = {this.state.currentUser}/>
-          </div> 
-          : <Login changeAfterLogin = {this.changeAfterLogin}/>}
+        <BrowserRouter>
+          <Switch>
+              <Route exact path="/" render={(props) => <Login {...props} changeAfterLogin = {this.changeAfterLogin}/>} />
+              <PrivateRoute exact path="/issues" component={IssuesKanban} userLoggedIn = {this.state.loggedIn} mun_id = {this.state.mun_id} currentUser = {this.state.currentUser}/> 
+              <PrivateRoute exact path="/issues/:issueId" component={IssueDetail} userLoggedIn = {this.state.loggedIn} />
+              <PrivateRoute exact path="/user/:username" component={UserSettings} username = {this.state.currentUser} userLoggedIn = {this.state.loggedIn} mun_id = {this.state.mun_id}/>
+              <PrivateRoute exact path="/register" component={Register} userLoggedIn = {this.state.loggedIn} 
+              mun_id = {this.state.mun_id}/>
+          </Switch>
+        </BrowserRouter>
       </div>
     );
   }
 }
+
+export default withRouter(App);

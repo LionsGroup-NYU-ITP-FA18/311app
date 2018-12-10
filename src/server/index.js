@@ -30,7 +30,6 @@ var router = express.Router();
 app.use('/api', router);
 app.listen(3000, () => console.log('Listening on port 3000!'));
 
-
 // Test route
 router.get('/', function(req, res) {
     res.json({ message: 'welcome to the municipality 311 app' });
@@ -46,4 +45,5 @@ router.get('/issues/municipality/:id',issues.munIssues);
 router.get('/issues/:id',issues.singleIssue);
 
 // Routes to get user information
-router.get('/user/:id',users.oneUser);
+router.get('/users/:username',users.oneUser);
+router.delete('/users/:username',users.removeUser);
