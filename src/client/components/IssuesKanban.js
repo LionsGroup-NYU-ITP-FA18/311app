@@ -11,6 +11,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import CustomCard from './CustomCard.js';
+import { appURL } from '../globalURL.js';
 
 const styles = theme => ({
   root: {
@@ -54,7 +55,7 @@ class IssuesKanban extends Component {
   }
 
   getIssues() {
-    fetch("http://localhost:3000/api/issues/municipality/"+this.props.mun_id)
+    fetch(appURL+"/api/issues/municipality/"+this.props.mun_id)
       .then(res => res.json())
       .then(
         (result) => {

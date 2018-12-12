@@ -7,15 +7,6 @@ const login = require('./routes/loginroutes');
 const issues = require('./routes/issueroutes');
 const users = require('./routes/userroutes');
 
-function connectDatabase() {
-  return mysql.createConnection({
-    host     : 'mysql-311app.cc9yj0tsmaa6.us-east-1.rds.amazonaws.com',
-    user     : 'ubuntu',
-    password : '1234567890',
-    database : '311app'
-  });
-}
-
 app.use(express.static('dist'));
 
 app.use(bodyParser.urlencoded({ extended: true }));

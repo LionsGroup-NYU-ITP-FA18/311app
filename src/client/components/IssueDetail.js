@@ -6,6 +6,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { appURL } from '../globalURL.js';
 
 const styles = {
   card: {
@@ -31,7 +32,7 @@ export default class IssueDetail extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:3000/api/issues/"+this.props.mun_id)
+    fetch(appURL+"/api/issues/"+this.props.mun_id)
       .then(res => res.json())
       .then(
         (result) => {

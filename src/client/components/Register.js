@@ -12,6 +12,7 @@ import Radio from '@material-ui/core/Radio';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import axios from 'axios';
+import { appURL } from '../globalURL.js';
 
 class Register extends Component {
   constructor(props){
@@ -38,7 +39,7 @@ class Register extends Component {
     }
 
   _handleClick(event){
-    var apiBaseUrl = "http://localhost:3000/api/";
+    var apiBaseUrl = appURL+"/api/";
     //To be done:check for empty values before hitting submit
     var self = this;
     // Don't use this in if statement, will evaluate to 0 and statement will fail
@@ -116,6 +117,9 @@ class Register extends Component {
               <Typography variant="h6" color="inherit" className={this.props.grow}>
                 User Registration
               </Typography>
+              <Button variant="contained" color="primary" onClick={(event) => this.props.history.goBack()}>
+                  Back to User Settings
+              </Button>
             </Toolbar>
           </AppBar>
           <div style={{display: 'flex', justifyContent: 'center'}}>

@@ -7,6 +7,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
+import { appURL } from '../globalURL.js';
 
 class Login extends Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class Login extends Component {
   }}
 
   _handleClick(event){
-     var apiBaseUrl = "http://localhost:3000/api/";
+     var apiBaseUrl = appURL+"/api/";
      var self = this;
      var payload={
        "username":this.state.username,

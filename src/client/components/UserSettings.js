@@ -14,6 +14,7 @@ import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
+import { appURL } from '../globalURL.js';
 
 const styles = theme => ({
   root: {
@@ -38,7 +39,7 @@ class UserSettings extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:3000/api/users/"+this.props.username)
+    fetch(appURL+"/api/users/"+this.props.username)
       .then(res => res.json())
       .then(
         (result) => {
@@ -63,7 +64,7 @@ class UserSettings extends Component {
       if(this.state.user_remove === this.props.username) {
         alert("Cannot remove yourself!")
       } else {
-        var userApiBaseUrl = "http://localhost:3000/api/users/";
+        var userApiBaseUrl = appURL+"/api/users/";
         axios.delete(userApiBaseUrl+this.state.user_remove)
         .then(function (response) {
           console.log(response);

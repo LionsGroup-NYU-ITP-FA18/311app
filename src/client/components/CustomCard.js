@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
+import { appURL } from '../globalURL.js';
 
 const styles = {
   card: {
@@ -42,7 +43,7 @@ export default class CustomCard extends Component {
     } else if(progress === "Needs Review") {
       progress = "Done";
     }
-    var issueBaseUrl = "http://localhost:3000/api/issues/update/";
+    var issueBaseUrl = appURL+"/api/issues/update/";
     var self = this;
     var payload={
       "progress":progress,
@@ -68,7 +69,7 @@ export default class CustomCard extends Component {
     } else if(progress === "Needs Review") {
       progress = "In Progress";
     }
-    var issueBaseUrl = "http://localhost:3000/api/issues/update/";
+    var issueBaseUrl = appURL+"/api/issues/update/";
     var self = this;
     var payload={
       "progress":progress,
