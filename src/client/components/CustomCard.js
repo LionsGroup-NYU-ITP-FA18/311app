@@ -67,14 +67,13 @@ export default class CustomCard extends Component {
     } else if(progress === "Needs Review") {
       progress = "In Progress";
     }
-    var issueBaseUrl = appURL+"/api/issues/update/";
     var self = this;
     var payload={
       "progress":progress,
       "issueId":this.props.issue.issueId
     }
 
-    axios.put(issueBaseUrl+this.props.issue.issueId, payload)
+    axios.put("/api/issues/update/"+this.props.issue.issueId, payload)
     .then(function (response) {
       console.log(response);
       self.props.getIssues();
