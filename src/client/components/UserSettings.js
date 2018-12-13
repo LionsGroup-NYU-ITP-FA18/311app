@@ -14,7 +14,6 @@ import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
-import { appURL } from '../globalURL.js';
 
 const styles = theme => ({
   root: {

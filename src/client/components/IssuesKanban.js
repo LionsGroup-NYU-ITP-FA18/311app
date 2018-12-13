@@ -11,7 +11,6 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import CustomCard from './CustomCard.js';
-import { appURL } from '../globalURL.js';
 
 const styles = theme => ({
   root: {

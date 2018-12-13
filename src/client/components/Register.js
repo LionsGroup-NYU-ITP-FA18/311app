@@ -12,7 +12,6 @@ import Radio from '@material-ui/core/Radio';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import axios from 'axios';
-import { appURL } from '../globalURL.js';
 
 class Register extends Component {
   constructor(props){
