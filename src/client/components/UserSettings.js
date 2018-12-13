@@ -39,7 +39,7 @@ class UserSettings extends Component {
   }
 
   componentDidMount() {
-    fetch(appURL+"/api/users/"+this.props.username)
+    fetch("/api/users/"+this.props.username)
       .then(res => res.json())
       .then(
         (result) => {
@@ -64,8 +64,7 @@ class UserSettings extends Component {
       if(this.state.user_remove === this.props.username) {
         alert("Cannot remove yourself!")
       } else {
-        var userApiBaseUrl = appURL+"/api/users/";
-        axios.delete(userApiBaseUrl+this.state.user_remove)
+        axios.delete("/api/users/"+this.state.user_remove)
         .then(function (response) {
           console.log(response);
           alert("User Deleted!");

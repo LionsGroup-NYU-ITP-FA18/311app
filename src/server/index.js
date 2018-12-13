@@ -27,15 +27,15 @@ router.get('/', function(req, res) {
 });
 
 // Routes to handle user registration
-router.post('/register',login.register);
-router.post('/login',login.login);
+router.post('/register/',login.register);
+router.post('/login/',login.login);
 
 // Routes for issues
-router.get('/issues',issues.issues);
-router.get('/issues/municipality/:id',issues.munIssues);
-router.get('/issues/:id',issues.singleIssue);
-router.put('/issues/update/:id',issues.updateIssueStatus);
+router.get('/issues/',issues.issues);
+router.get('/issues/municipality/:id/',issues.munIssues);
+router.get('/issues/:id/',issues.singleIssue);
+router.put('/issues/update/:id/',issues.updateIssueStatus);
 
 // Routes to get user information
-router.get('/users/:username',users.oneUser);
-router.delete('/users/:username',users.removeUser);
+router.get('/users/:username/',users.oneUser);
+router.delete('/users/:username/',users.removeUser);

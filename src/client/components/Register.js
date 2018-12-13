@@ -39,7 +39,6 @@ class Register extends Component {
     }
 
   _handleClick(event){
-    var apiBaseUrl = appURL+"/api/";
     //To be done:check for empty values before hitting submit
     var self = this;
     // Don't use this in if statement, will evaluate to 0 and statement will fail
@@ -55,7 +54,7 @@ class Register extends Component {
           "username":this.state.username,
           "mun_id":self.props.mun_id
         }
-        axios.post(apiBaseUrl+'/register', payload)
+        axios.post('/api/register', payload)
        .then(function (response) {
          console.log(response);
          if(response.data.code == 200){

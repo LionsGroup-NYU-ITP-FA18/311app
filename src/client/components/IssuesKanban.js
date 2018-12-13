@@ -55,7 +55,7 @@ class IssuesKanban extends Component {
   }
 
   getIssues() {
-    fetch(appURL+"/api/issues/municipality/"+this.props.mun_id)
+    fetch("/api/issues/municipality/"+this.props.mun_id)
       .then(res => res.json())
       .then(
         (result) => {

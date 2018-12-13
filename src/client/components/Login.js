@@ -20,14 +20,13 @@ class Login extends Component {
   }}
 
   _handleClick(event){
-     var apiBaseUrl = appURL+"/api/";
      var self = this;
      var payload={
        "username":this.state.username,
        "password":this.state.password
      }
 
-     axios.post(apiBaseUrl+'login', payload)
+     axios.post('/api/login', payload)
      .then(function (response) {
        console.log(response);
        if(response.data.code == 200){

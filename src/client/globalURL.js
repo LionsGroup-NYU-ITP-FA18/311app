@@ -8,7 +8,7 @@
 
 
 // Production
-// const export appURL = 'ec2-35-153-81-20.compute-1.amazonaws.com';
+// export const appURL = 'ec2-35-153-81-20.compute-1.amazonaws.com';
 
 // Development, port number should match listening port from server
 export const appURL = 'http://localhost:3000';
