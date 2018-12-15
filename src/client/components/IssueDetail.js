@@ -31,7 +31,7 @@ export default class IssueDetail extends Component {
   }
 
   componentDidMount() {
-    fetch("/api/issues/"+this.props.mun_id)
+    fetch("/api/issues/"+this.props.mun_id+this.props.issueId)
       .then(res => res.json())
       .then(
         (result) => {

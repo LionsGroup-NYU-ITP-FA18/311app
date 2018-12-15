@@ -14,6 +14,16 @@ if(!err) {
 }
 });
 
+exports.getUsersFromMun = function(req,res){
+  connection.query('SELECT username FROM users WHERE mun_id = ?', req.params.id, function (error, results, fields) {
+    if (error) {
+      console.error('Error connecting: ' + error.stack);
+      return;
+    }
+    res.send(results)
+  });
+}
+
 exports.oneUser = function(req,res){
   connection.query('SELECT * FROM users WHERE username = ?', req.params.username, function (error, results, fields) {
     if (error) {

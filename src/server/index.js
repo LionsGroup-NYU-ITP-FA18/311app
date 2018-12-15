@@ -34,8 +34,10 @@ router.post('/login/',login.login);
 router.get('/issues/',issues.issues);
 router.get('/issues/municipality/:id/',issues.munIssues);
 router.get('/issues/:id/',issues.singleIssue);
-router.put('/issues/update/:id/',issues.updateIssueStatus);
+router.put('/issues/update/progress/:id/',issues.updateIssueProgress);
+router.put('/issues/update/user/:id/',issues.updateIssueUser);
 
 // Routes to get user information
 router.get('/users/:username/',users.oneUser);
 router.delete('/users/:username/',users.removeUser);
+router.get('/users/municipality/:id/',users.getUsersFromMun);

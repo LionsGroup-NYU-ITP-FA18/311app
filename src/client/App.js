@@ -18,7 +18,7 @@ const PrivateRoute = ({ component: Component, userLoggedIn, ...rest }) => (
 )
 
 class App extends Component {
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -26,11 +26,11 @@ class App extends Component {
       mun_id: -1,
       currentUser: ''
     }
-    
+
     this.changeAfterLogin = this.changeAfterLogin.bind(this);
     this.signOut = this.signOut.bind(this);
   }
-  
+
   changeAfterLogin(id, username) {
     this.setState({
       loggedIn: true,
@@ -51,10 +51,10 @@ class App extends Component {
         <BrowserRouter>
           <Switch>
               <Route exact path="/" render={(props) => <Login {...props} changeAfterLogin = {this.changeAfterLogin}/>} />
-              <PrivateRoute exact path="/issues" component={IssuesKanban} userLoggedIn = {this.state.loggedIn} mun_id = {this.state.mun_id} currentUser = {this.state.currentUser} signOut= {this.signOut}/> 
+              <PrivateRoute exact path="/issues" component={IssuesKanban} userLoggedIn = {this.state.loggedIn} mun_id = {this.state.mun_id} currentUser = {this.state.currentUser} signOut= {this.signOut}/>
               <PrivateRoute exact path="/issues/:issueId" component={IssueDetail} userLoggedIn = {this.state.loggedIn} />
               <PrivateRoute exact path="/user/:username" component={UserSettings} username = {this.state.currentUser} userLoggedIn = {this.state.loggedIn} mun_id = {this.state.mun_id} signOut= {this.signOut}/>
-              <PrivateRoute exact path="/register" component={Register} userLoggedIn = {this.state.loggedIn} 
+              <PrivateRoute exact path="/register" component={Register} userLoggedIn = {this.state.loggedIn}
               mun_id = {this.state.mun_id}/>
           </Switch>
         </BrowserRouter>

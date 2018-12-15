@@ -38,7 +38,6 @@ class Register extends Component {
     }
 
   _handleClick(event){
-    //To be done:check for empty values before hitting submit
     var self = this;
     // Don't use this in if statement, will evaluate to 0 and statement will fail
     var numAdmin = parseInt(this.state.admin);
