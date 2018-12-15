@@ -11,6 +11,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import CustomCard from './CustomCard.js';
+import axios from 'axios';
 
 const styles = theme => ({
   root: {
@@ -41,54 +42,44 @@ const styles = theme => ({
 });
 
 class IssuesKanban extends Component {
-  
+
   constructor(props) {
     super(props);
     this.getIssues = this.getIssues.bind(this);
-    
+
     this.state = {
-      error: null,
-      isLoaded: false,
       issues: []
     };
   }
 
   getIssues() {
-    fetch("/api/issues/municipality/"+this.props.mun_id)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            isLoaded: true,
-            issues: result
-          });
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        }
-      )
-    }
-  
+    var self = this;
+    axios.get("/api/issues/municipality/"+this.props.mun_id)
+    .then(function (response) {
+      console.log(response);
+      self.setState({
+        issues: response.data
+      })
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
 
   componentDidMount() {
     this.getIssues();
     }
-    
+
     fillColumn(str) {
       var arr = []
       this.state.issues.map((issue) => {
       if(issue.progress === str) {
         arr.push(<CustomCard issue={issue} getIssues={this.getIssues}/>)
       }})
-      return arr 
+      return arr
     }
-    
+
     render() {
       return (
         <div>
@@ -99,7 +90,7 @@ class IssuesKanban extends Component {
                 <Typography variant="h6" color="inherit" className={this.props.grow}>
                   Hello {this.props.currentUser}
                 </Typography>
-                <Button variant="contained" color="primary" className={this.props.userButton} 
+                <Button variant="contained" color="primary" className={this.props.userButton}
                 onClick={(event) => this.props.history.push('/user/'+ this.props.currentUser)} >
                   User Settings
                 </Button>
@@ -111,7 +102,7 @@ class IssuesKanban extends Component {
               <Grid container spacing={24}>
                 <Grid item xs={3}>
                   <Paper className={this.props.paper}>
-                  New  
+                  New
                   <Divider />
                     {this.fillColumn("New")}
                   </Paper>

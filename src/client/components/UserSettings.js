@@ -38,20 +38,21 @@ class UserSettings extends Component {
   }
 
   componentDidMount() {
-    fetch("/api/users/"+this.props.username)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          console.log(result);
-          this.setState({
-            admin: result[0].admin,
-            email: result[0].email,
-            first_name: result[0].first_name,
-            last_name: result[0].last_name
-          });
-        }
-      )
-    }
+    var self = this;
+    axios.get("/api/users/"+this.props.username)
+    .then(function (response) {
+      console.log(response);
+      self.setState({
+        admin: response.data[0].admin,
+        email: response.data[0].email,
+        first_name: response.data[0].first_name,
+        last_name: response.data[0].last_name
+      })
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
 
     _handleUserChange(e) {
         this.setState({

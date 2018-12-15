@@ -31,26 +31,18 @@ export default class IssueDetail extends Component {
   }
 
   componentDidMount() {
-    fetch("/api/issues/"+this.props.mun_id+this.props.issueId)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            isLoaded: true,
-            issues: result
-          });
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        }
-      )
-    }
+    var self = this;
+    axios.get("/api/issues/"+this.props.id)
+    .then(function (response) {
+      console.log(response);
+      self.setState({
+        options: response.data
+      })
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
 
   render() {
     return (
