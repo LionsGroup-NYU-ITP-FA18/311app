@@ -16,7 +16,7 @@ This should open up the local web app at the url "http://localhost:3000/"
 
 Alternatively, you can access what has already been implemented
 and built from this url:
-http://ec2-35-171-166-206.compute-1.amazonaws.com/
+http://ec2-35-153-81-20.compute-1.amazonaws.com/
 
 The EC2 instance has been configured with PM2 to manage production processes,
 Express as the web framework to route and create those processes,
