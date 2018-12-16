@@ -172,7 +172,7 @@ class IssueDetail extends Component {
                   <ListItemText primary={this.state.issue.downvote} />
                 </ListItem>
                 <ListItem button>
-                  <ListItemText primary="User In Charge" />
+                  <ListItemText primary="User Assigned" />
                   <ListItemText primary={this.state.issue.username === "" ?
                 "Not Yet Assigned" : this.state.issue.username } />
                 </ListItem>

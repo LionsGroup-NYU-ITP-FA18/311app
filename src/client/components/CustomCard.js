@@ -100,7 +100,8 @@ export default class CustomCard extends Component {
             Location: {this.props.issue.location}
           </Typography>
           <Typography className={this.props.pos} color="textSecondary">
-            User assigned: {this.props.issue.username}
+            User assigned: {this.props.issue.username === "" ?
+          "Not Yet Assigned" : this.props.issue.username}
           </Typography>
           <Typography component="p">
             {this.props.issue.content}

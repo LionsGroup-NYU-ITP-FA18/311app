@@ -25,7 +25,7 @@ exports.issues = function(req,res){
 }
 
 exports.munIssues = function(req,res){
-  connection.query('SELECT * FROM issues WHERE mun_id = ?', req.params.id, function (error, results, fields) {
+  connection.query('SELECT * FROM issues WHERE mun_id = ? ORDER BY heading', req.params.id, function (error, results, fields) {
     if (error) {
       console.error('Error connecting: ' + error.stack);
       return;
