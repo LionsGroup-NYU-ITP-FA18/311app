@@ -16,10 +16,10 @@ export default class CustomCard extends Component {
     this._progressUp = this._progressUp.bind(this);
     this._progressDown = this._progressDown.bind(this);
     this._assignUser = this._assignUser.bind(this);
-    this.updateProgress = this.updateProgress.bind(this);
+    this._updateProgress = this._updateProgress.bind(this);
   }
 
-  updateProgress(progress) {
+  _updateProgress(progress) {
     var self = this;
     var payload={
       "progress":progress,
@@ -45,7 +45,7 @@ export default class CustomCard extends Component {
     } else if(progress === "Needs Review") {
       progress = "Done";
     }
-    this.updateProgress(progress);
+    this._updateProgress(progress);
   }
 
   _progressDown(event) {
@@ -57,7 +57,7 @@ export default class CustomCard extends Component {
     } else if(progress === "In Progress") {
       progress = "New";
     }
-    this.updateProgress(progress);
+    this._updateProgress(progress);
     if(progress === "New")
       this._assignUser(""); // If moved back as new issue, should not have user assigned to it
   }
@@ -108,8 +108,11 @@ export default class CustomCard extends Component {
           {this.props.issue.progress == "New" ? <Typography component="p"> <UserSelection assignUser={this._assignUser} mun_id={this.props.issue.mun_id}/> </Typography> : <div />}
         </CardContent>
         <CardActions>
-          {this.props.issue.progress != "New" ? <Button size="small" onClick={(event) => this._progressDown()}>Move left</Button> : <div />}
-          {(this.props.issue.progress === "Done" || this.props.issue.progress === "New") ? <div /> : <Button size="small" onClick={(event) => this._progressUp()}>Move right</Button>}
+          {this.props.issue.progress != "New" ? <Button variant="contained" color="primary" size="small" onClick={(event) => this._progressDown()}>Move left</Button> : <div />}
+          {(this.props.issue.progress === "Done" || this.props.issue.progress === "New") ? <div /> : <Button variant="contained" color="primary" size="small" onClick={(event) => this._progressUp()}>Move right</Button>}
+          <Button variant="contained" color="primary" size="small"
+          onClick={(event) => this.props.history.push('/issues/'+ this.props.issue.issueId)}>
+          Learn More </Button>
         </CardActions>
       </Card>
     )

@@ -69,13 +69,13 @@ class IssuesKanban extends Component {
 
   componentDidMount() {
     this.getIssues();
-    }
+  }
 
     fillColumn(str) {
       var arr = []
       this.state.issues.map((issue) => {
       if(issue.progress === str) {
-        arr.push(<CustomCard issue={issue} getIssues={this.getIssues}/>)
+        arr.push(<CustomCard issue={issue} getIssues={this.getIssues} history={this.props.history}/>)
       }})
       return arr
     }

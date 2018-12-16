@@ -52,7 +52,7 @@ class App extends Component {
           <Switch>
               <Route exact path="/" render={(props) => <Login {...props} changeAfterLogin = {this.changeAfterLogin}/>} />
               <PrivateRoute exact path="/issues" component={IssuesKanban} userLoggedIn = {this.state.loggedIn} mun_id = {this.state.mun_id} currentUser = {this.state.currentUser} signOut= {this.signOut}/>
-              <PrivateRoute exact path="/issues/:issueId" component={IssueDetail} userLoggedIn = {this.state.loggedIn} />
+              <PrivateRoute exact path="/issues/:issueId" component={IssueDetail} userLoggedIn = {this.state.loggedIn} signOut={this.signOut}/>
               <PrivateRoute exact path="/user/:username" component={UserSettings} username = {this.state.currentUser} userLoggedIn = {this.state.loggedIn} mun_id = {this.state.mun_id} signOut= {this.signOut}/>
               <PrivateRoute exact path="/register" component={Register} userLoggedIn = {this.state.loggedIn}
               mun_id = {this.state.mun_id}/>

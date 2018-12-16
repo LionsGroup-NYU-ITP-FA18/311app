@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const login = require('./routes/loginroutes');
 const issues = require('./routes/issueroutes');
 const users = require('./routes/userroutes');
+const mun = require('./routes/municipalityroutes');
+const comments = require('./routes/commentroutes');
 
 app.use(express.static('dist'));
 
@@ -41,3 +43,10 @@ router.put('/issues/update/user/:id/',issues.updateIssueUser);
 router.get('/users/:username/',users.oneUser);
 router.delete('/users/:username/',users.removeUser);
 router.get('/users/municipality/:id/',users.getUsersFromMun);
+
+// Routes to get municipality information
+router.get('/municipality/:id/',mun.singleMun);
+//router.put('/municipality/:id/',mun.changeMun);
+
+// Routes to get user comments from users
+router.get('/comments/:id/',comments.getComments);

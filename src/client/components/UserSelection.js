@@ -29,7 +29,6 @@ export default class UserSelection extends Component {
     .then(function (response) {
       console.log(response);
       var temp = [];
-      temp.push(''); // Have the first item as a blank item
       response.data.forEach(element => {
         temp.push(element.username);
       });

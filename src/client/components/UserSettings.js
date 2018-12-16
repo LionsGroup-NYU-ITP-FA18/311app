@@ -33,7 +33,8 @@ class UserSettings extends Component {
       admin:0,
       email:'',
       first_name:'',
-      last_name:''
+      last_name:'',
+      municipality: {}
     };
   }
 
@@ -47,6 +48,18 @@ class UserSettings extends Component {
         email: response.data[0].email,
         first_name: response.data[0].first_name,
         last_name: response.data[0].last_name
+      })
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+    // Get Municipality Info
+    axios.get("/api/municipality/"+this.props.mun_id)
+    .then(function (response) {
+      console.log(response);
+      self.setState({
+        municipality: response.data[0]
       })
     })
     .catch(function (error) {
@@ -132,6 +145,24 @@ class UserSettings extends Component {
                 </Button>
                 </div>
                 : <div />}
+              </List>
+              <List component="munDetails">
+                <ListItem>
+                  <ListItemText primary="Municipality Name" />
+                  <ListItemText primary={this.state.municipality.mun_name} />
+                </ListItem>
+                <ListItem>
+                  <ListItemText primary="Municipality Level" />
+                  <ListItemText primary={this.state.municipality.mun_level} />
+                </ListItem>
+                <ListItem>
+                  <ListItemText primary="Municipality Contact Email" />
+                  <ListItemText primary={this.state.municipality.contact_email} />
+                </ListItem>
+                <ListItem>
+                  <ListItemText primary="Municipality Contact Number" />
+                  <ListItemText primary={this.state.municipality.contact_number} />
+                </ListItem>
               </List>
             </div>
           </div>
