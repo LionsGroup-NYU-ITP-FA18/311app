@@ -43,26 +43,40 @@ class Register extends Component {
     var numAdmin = parseInt(this.state.admin);
     if(this.state.first_name && this.state.last_name && this.state.username
     && this.state.email && this.state.password && this.state.admin) {
-        var payload={
-          "first_name": this.state.first_name,
-          "last_name":this.state.last_name,
-          "email":this.state.email,
-          "password":this.state.password,
-          "admin":numAdmin,
-          "username":this.state.username,
-          "mun_id":self.props.mun_id
+
+      // Don't add a user with the same username
+      axios.get('/api/users/'+this.state.username)
+      .then(function (response) {
+        if(response.data.length != 0) {
+          alert("Username already exists!")
+        } else {
+          // If unique user add
+          var payload={
+            "first_name": self.state.first_name,
+            "last_name":self.state.last_name,
+            "email":self.state.email,
+            "password":self.state.password,
+            "admin":numAdmin,
+            "username":self.state.username,
+            "mun_id":self.props.mun_id
+          }
+          axios.post('/api/register', payload)
+         .then(function (response) {
+           console.log(response);
+           if(response.data.code == 200){
+             alert("registration successful");
+             self.goBack();
+              }
+           })
+         .catch(function (error) {
+           console.log(error);
+         });
         }
-        axios.post('/api/register', payload)
-       .then(function (response) {
-         console.log(response);
-         if(response.data.code == 200){
-           alert("registration successful");
-           self.goBack();
-            }
-         })
-       .catch(function (error) {
-         console.log(error);
-       });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
      } else {
        alert("Please fill all fields before registering user!");
      }

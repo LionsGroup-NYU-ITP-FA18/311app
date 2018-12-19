@@ -106,7 +106,7 @@ export default class CustomCard extends Component {
           <Typography component="p">
             {this.props.issue.content}
           </Typography>
-          {this.props.issue.progress == "New" ? <Typography component="p"> <UserSelection assignUser={this._assignUser} mun_id={this.props.issue.mun_id}/> </Typography> : <div />}
+          {this.props.issue.progress == "New" ? <Typography component="p"> <UserSelection assignUser={this._assignUser} mun_id={this.props.issue.mun_id} functionality={"assign"}/> </Typography> : <div />}
         </CardContent>
         <CardActions>
           {this.props.issue.progress != "New" ? <Button variant="contained" color="primary" size="small" onClick={(event) => this._progressDown()}>Move left</Button> : <div />}

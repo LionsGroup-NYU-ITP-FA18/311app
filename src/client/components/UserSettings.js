@@ -14,6 +14,7 @@ import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
+import UserSelection from './UserSelection.js';
 
 const styles = theme => ({
   root: {
@@ -29,7 +30,7 @@ class UserSettings extends Component {
     this._handleUserChange = this._handleUserChange.bind(this);
     this.removeUser = this.removeUser.bind(this);
     this.state = {
-      user_remove:'',
+      user_remove:0,
       admin:0,
       email:'',
       first_name:'',
@@ -73,14 +74,21 @@ class UserSettings extends Component {
         });
     }
 
-    removeUser(event) {
-      if(this.state.user_remove === this.props.username) {
+    removeUser(name) {
+      var self = this;
+      if(name === this.props.username) {
         alert("Cannot remove yourself!")
       } else {
-        axios.delete("/api/users/"+this.state.user_remove)
+        axios.delete("/api/users/"+name)
         .then(function (response) {
           console.log(response);
           alert("User Deleted!");
+          // Force rerender so we see the component
+          // without the removed user
+          // This state means nothing else
+          self.setState({
+            user_remove: self.state.user_remove+1
+          });
           })
         .catch(function (error) {
           console.log(error);
@@ -133,16 +141,8 @@ class UserSettings extends Component {
                   Register New User
                 </Button>
                 <Divider />
-                <TextField
-                  name="Remove User"
-                  label="Remove User"
-                  variant="outlined"
-                  value={this.state.user_remove}
-                  onChange = {this._handleUserChange}
-                  />
-                <Button variant="contained" color="primary" onClick={(event) => this.removeUser(event)}>
-                    Remove user
-                </Button>
+                <UserSelection
+                 removeUser={this.removeUser} mun_id={this.props.mun_id} functionality={"remove"}/>
                 </div>
                 : <div />}
               </List>

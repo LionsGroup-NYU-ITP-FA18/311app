@@ -64,17 +64,26 @@ export default class UserSelection extends Component {
             button
             aria-haspopup="true"
             aria-controls="lock-menu"
-            aria-label="Assign User to issue"
             onClick={this.handleClickListItem}
           >
+            {this.props.functionality === "assign" ?
             <ListItemText
               primary="Assign user to issue"
               secondary={this.state.options[this.state.selectedIndex]}
             />
+            :
+            <ListItemText
+              primary="Remove user"
+              secondary={this.state.options[this.state.selectedIndex]}
+            />
+          }
           </ListItem>
+          {this.props.functionality === "assign" ?
           <Button variant="contained" color="primary" onClick={(event) => this.props.assignUser(this.state.options[this.state.selectedIndex])}>
             Assign User
-          </Button>
+          </Button> : <Button variant="contained" color="primary" onClick={(event) => this.props.removeUser(this.state.options[this.state.selectedIndex])}>
+            Remove User
+          </Button>}
         </List>
         <Menu
           id="lock-menu"
