@@ -29,14 +29,21 @@ class UserSettings extends Component {
     super(props);
     this._handleUserChange = this._handleUserChange.bind(this);
     this.removeUser = this.removeUser.bind(this);
+    this.refreshUserList = this.refreshUserList.bind(this);
     this.state = {
-      user_remove:0,
       admin:0,
       email:'',
       first_name:'',
       last_name:'',
-      municipality: {}
+      municipality: {},
+      refreshUser : false
     };
+  }
+
+  refreshUserList() {
+    this.setState({
+      refreshUser: !this.state.refreshUser
+    })
   }
 
   componentDidMount() {
@@ -82,13 +89,11 @@ class UserSettings extends Component {
         axios.delete("/api/users/"+name)
         .then(function (response) {
           console.log(response);
-          alert("User Deleted!");
           // Force rerender so we see the component
           // without the removed user
           // This state means nothing else
-          self.setState({
-            user_remove: self.state.user_remove+1
-          });
+          self.refreshUserList();
+          alert("User Deleted!");
           })
         .catch(function (error) {
           console.log(error);
@@ -142,7 +147,8 @@ class UserSettings extends Component {
                 </Button>
                 <Divider />
                 <UserSelection
-                 removeUser={this.removeUser} mun_id={this.props.mun_id} functionality={"remove"}/>
+                 removeUser={this.removeUser} mun_id={this.props.mun_id} functionality={"remove"}
+                 refresh={this.state.refreshUser}/>
                 </div>
                 : <div />}
               </List>

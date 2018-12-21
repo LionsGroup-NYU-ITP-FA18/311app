@@ -23,6 +23,28 @@ export default class UserSelection extends Component {
     this.handleClose = this.handleClose.bind(this);
   }
 
+  componentWillReceiveProps(props) {
+      const {refresh} = this.props;
+      if(props.refresh !== refresh) {
+        var self = this;
+        axios.get('/api/users/municipality/'+this.props.mun_id)
+        .then(function (response) {
+          console.log(response);
+          var temp = [];
+          response.data.forEach(element => {
+            temp.push(element.username);
+          });
+
+          self.setState({
+            options: temp
+          })
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
+  }
+
   componentDidMount() {
     var self = this;
     axios.get('/api/users/municipality/'+this.props.mun_id)
