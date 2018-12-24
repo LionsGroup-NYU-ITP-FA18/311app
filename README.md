@@ -33,3 +33,18 @@ and possibly additionally this command:
 ```shell
 sudo service nginx restart
 ```
+
+Once modifications are made locally, these steps can be taken to re-deploy the app with the changes:
+
+Stop all the currently running processes (stop the reverse proxy, stop the continuous deployment):
+```shell
+sudo service nginx stop
+pm2 delete all
+```
+
+After pulling the current changes, rebuild the project and deploy:
+```shell
+sudo npm run build
+pm2 start src/server/index.js
+sudo service nginx start
+```
