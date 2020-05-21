@@ -22,14 +22,9 @@ The EC2 instance has been configured with PM2 to manage production processes,
 Express as the web framework to route and create those processes,
 and Nginx as the web server.
 
-Restarting the server consists of running this command:
+Restarting the server consists of running these commands:
 
 ```shell
 pm2 restart index
-```
-
-and possibly additionally this command:
-
-```shell
 sudo service nginx restart
 ```
